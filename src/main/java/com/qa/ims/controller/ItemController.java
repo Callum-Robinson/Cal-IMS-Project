@@ -29,7 +29,11 @@ public class ItemController implements CrudController<Item> {
 	}
 	
 	
-
+	/*
+	 * Creates a item instance with the user entered fields
+	 * 
+	 * @return the item
+	 */
 	@Override
 	public Item create() {
 		LOGGER.info("Please enter the type of item");
