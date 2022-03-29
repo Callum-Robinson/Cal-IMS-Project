@@ -49,10 +49,19 @@ public class ItemController implements CrudController<Item> {
 		return item;
 	}
 	
+	
+	/*
+	 * Reads all items to the console using the logger
+	 * 
+	 * @return the list of items
+	 */
 	@Override
 	public List<Item> readAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Item> items = itemDAO.readAll();
+		for (Item item : items) {
+			LOGGER.info(item);
+		}
+		return items;
 	}
 
 	@Override
