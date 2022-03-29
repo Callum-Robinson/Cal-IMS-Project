@@ -64,10 +64,27 @@ public class ItemController implements CrudController<Item> {
 		return items;
 	}
 
+	
+	/*
+	 * Updates an item by taking a user input
+	 * 
+	 * @return the updated item
+	 */
 	@Override
 	public Item update() {
-		// TODO Auto-generated method stub
-		return null;
+		LOGGER.info("Please enter the id of the item you would like to update");
+		Long id = utils.getLong();
+		LOGGER.info("Please enter the type of item");
+		String type = utils.getString();
+		LOGGER.info("Please enter the name of the item");
+		String name = utils.getString();
+		LOGGER.info("Please enter a description of the item");
+		String description = utils.getString();
+		LOGGER.info("Please enter the cost of the item");
+		Double cost = utils.getDouble();
+		Item item = itemDAO.update(new Item(id, type, name, description, cost));
+		LOGGER.info("Item updated");
+		return item;
 	}
 
 	@Override
