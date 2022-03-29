@@ -129,9 +129,30 @@ public class ItemDAO implements Dao<Item> {
 		return null;
 	}
 
+	
+	/*
+	 * Updates an item in the database
+	 * 
+	 * @param item - takes in a item object
+	 * 
+	 * @return updated item using the read(id) method, if exception caught return null
+	 */
 	@Override
-	public Item update(Item t) {
-		// TODO Auto-generated method stub
+	public Item update(Item item) {
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection.prepareStatement
+						("UPDATE items SET type = ?, name = ?, description = ?, cost = ? WHERE id = ?");) {
+			statement.setString(1, item.getType());
+			statement.setString(2, item.getName());
+			statement.setString(3, item.getDescription());
+			statement.setDouble(4, item.getCost());
+			statement.setLong(5, item.getId());
+			statement.executeUpdate();
+			return read(item.getId());
+		} catch (Exception e) {
+			LOGGER.debug(e);
+			LOGGER.error(e.getMessage());
+		}
 		return null;
 	}
 
