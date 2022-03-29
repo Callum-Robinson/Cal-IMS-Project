@@ -30,7 +30,7 @@ public class ItemDAO implements Dao<Item> {
 		String type = resultSet.getString("type");
 		String name = resultSet.getString("name");
 		String description = resultSet.getString("description");
-		Float cost = resultSet.getFloat("cost");
+		Double cost = resultSet.getDouble("cost");
 		return new Item(id, type, name, description, cost);
 	}
 
@@ -71,7 +71,7 @@ public class ItemDAO implements Dao<Item> {
 							statement.setString(1, item.getType());
 							statement.setString(2, item.getName());
 							statement.setString(3, item.getDescription());
-							statement.setFloat(4, item.getCost());
+							statement.setDouble(4, item.getCost());
 							statement.executeUpdate();
 							return readLatest();
 		} catch (Exception e) {

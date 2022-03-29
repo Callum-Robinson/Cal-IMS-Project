@@ -8,10 +8,10 @@ public class Item {
 	private String type;
 	private String name;
 	private String description;
-	private Float cost;
+	private Double cost;
 	
 	// Constructor with crucial fields
-	public Item(String type, String name, Float cost) {
+	public Item(String type, String name, Double cost) {
 		this.type = type;
 		this.name = name;
 		this.cost = cost;
@@ -20,7 +20,7 @@ public class Item {
 	/*
 	 * Constructor with all fields
 	 */
-	public Item(Long id, String type, String name, String description, Float cost) {
+	public Item(Long id, String type, String name, String description, Double cost) {
 		this.id = id;
 		this.type = type;
 		this.name = name;
@@ -32,14 +32,14 @@ public class Item {
 	/*
 	 * Other constructors
 	 */
-	public Item(Long id, String type, String name, Float cost) {
+	public Item(Long id, String type, String name, Double cost) {
 		this.id = id;
 		this.type = type;
 		this.name = name;
 		this.cost = cost;
 	}
 	
-	public Item(String type, String name, String description, Float cost) {
+	public Item(String type, String name, String description, Double cost) {
 		super();
 		this.type = type;
 		this.name = name;
@@ -83,11 +83,11 @@ public class Item {
 		this.description = description;
 	}
 
-	public Float getCost() {
+	public Double getCost() {
 		return cost;
 	}
 
-	public void setCost(Float cost) {
+	public void setCost(Double cost) {
 		this.cost = cost;
 	}
 
