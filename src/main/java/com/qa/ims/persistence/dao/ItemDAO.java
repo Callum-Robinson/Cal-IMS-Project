@@ -37,7 +37,7 @@ public class ItemDAO implements Dao<Item> {
 
 
 	/*
-	 * Reads latest item in the database and calls the modelFromResultSet method
+	 * Reads latest item in the database and calls the method to model the item to an item object
 	 * 
 	 * @return an object for the latest item in table, if exception caught then return null
 	 */
@@ -105,9 +105,27 @@ public class ItemDAO implements Dao<Item> {
 		return new ArrayList<>();
 	}
 
+	
+	/*
+	 * Read an item from the database using its id and calls the method to model the item to an item object
+	 * 
+	 * @param the item id
+	 * 
+	 * @return the item, if exception caught then return null
+	 */
 	@Override
 	public Item read(Long id) {
-		// TODO Auto-generated method stub
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection.prepareStatement("SELECT * FROM items WHERE id = ?");) {
+			statement.setLong(1, id);
+			try (ResultSet resultSet = statement.executeQuery();) {
+				resultSet.next();
+				return modelFromResultSet(resultSet);
+			}
+		} catch (Exception e) {
+			LOGGER.debug(e);
+			LOGGER.error(e.getMessage());
+		}
 		return null;
 	}
 
