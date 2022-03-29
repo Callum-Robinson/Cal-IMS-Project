@@ -156,9 +156,22 @@ public class ItemDAO implements Dao<Item> {
 		return null;
 	}
 
+	
+	/*
+	 * Deletes an item in the database
+	 * 
+	 * @param id - the item id
+	 */
 	@Override
 	public int delete(long id) {
-		// TODO Auto-generated method stub
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection.prepareStatement("DELETE FROM items WHERE id = ?");) {
+			statement.setLong(1, id);
+			return statement.executeUpdate();
+		} catch (Exception e) {
+			LOGGER.debug(e);
+			LOGGER.error(e.getMessage());
+		}
 		return 0;
 	}
 
