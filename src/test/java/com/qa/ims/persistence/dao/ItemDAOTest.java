@@ -2,6 +2,9 @@ package com.qa.ims.persistence.dao;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -37,7 +40,32 @@ public class ItemDAOTest {
 	 */
 	@Test
 	public void testReadLatest() {
-		assertEquals(new Item (1L, "Ice cream", "Strawberry ice cream", "Classic strawberry flavoured ice cream", 2.99), DAO.readLatest());
+		assertEquals(new Item (1L, "Ice cream", "Strawberry ice cream", "Classic strawberry flavoured ice cream", 2.99),
+				DAO.readLatest());
 	}
+	
+	
+	/*
+	 * Test the read all method in the Item DAO
+	 */
+	@Test
+	public void testReadAll() {
+		List<Item> expected = new ArrayList<>();
+		expected.add(new Item(1L, "Ice cream", "Strawberry ice cream", "Classic strawberry flavoured ice cream", 2.99));
+		assertEquals(expected, DAO.readAll());
+	}
+	
+	
+	/*
+	 * Test the read by id method
+	 */
+	@Test
+	public void testRead() {
+		final long ID = 1L;
+		assertEquals(new Item(ID, "Ice cream", "Strawberry ice cream", "Classic strawberry flavoured ice cream", 2.99),
+				DAO.read(ID));
+	}
+	
+	
 	
 }
