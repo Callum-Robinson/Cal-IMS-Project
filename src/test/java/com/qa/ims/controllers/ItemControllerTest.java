@@ -68,4 +68,25 @@ public class ItemControllerTest {
 		
 		Mockito.verify(dao, Mockito.times(1)).readAll();
 	}
+	
+	
+	/*
+	 * Test the update method by mocking the user input and DAO update method
+	 */
+	@Test
+	public void testUpdate() {
+		Item updated = new Item (2L, "Cake", "Chocolate fudge cake", "Chocolatey fudge cake", 4.89);
+		
+		Mockito.when(utils.getLong()).thenReturn(2L);
+		Mockito.when(utils.getString()).thenReturn(updated.getType(), updated.getName(), updated.getDescription());
+		Mockito.when(utils.getDouble()).thenReturn(updated.getCost());
+		Mockito.when(dao.update(updated)).thenReturn(updated);
+		
+		assertEquals(updated, controller.update());
+		
+		Mockito.verify(utils, Mockito.times(1)).getLong();
+		Mockito.verify(utils, Mockito.times(3)).getString();
+		Mockito.verify(utils, Mockito.times(1)).getDouble();
+		Mockito.verify(dao, Mockito.times(1)).update(updated);
+	}
 }
