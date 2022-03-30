@@ -23,7 +23,7 @@ public class ItemDAO implements Dao<Item> {
 	 * 
 	 * @param resultset - takes in a result set, the data for each column is added to the appropriate field
 	 * 
-	 * @return a instance of Item using the constructor with all fields
+	 * @return an instance of Item using the constructor with all fields
 	 */
 	@Override
 	public Item modelFromResultSet(ResultSet resultSet) throws SQLException {
@@ -37,7 +37,7 @@ public class ItemDAO implements Dao<Item> {
 
 
 	/*
-	 * Reads latest item in the database and calls the method to model the item to an item object
+	 * Reads the latest item in the database and calls the method to model the item to an item object
 	 * 
 	 * @return an object for the latest item in table, if exception caught then return null
 	 */
