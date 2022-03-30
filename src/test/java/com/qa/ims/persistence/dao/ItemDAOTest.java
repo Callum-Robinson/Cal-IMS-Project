@@ -67,5 +67,11 @@ public class ItemDAOTest {
 	}
 	
 	
-	
+	/*
+	 * Test the update method
+	 */
+	public void testUpdate() {
+		final Item updated = new Item (2L, "Cake", "Chocolate fudge cake", "Chocolatey fudge cake", 4.89);
+		assertEquals(updated, DAO.update(updated));
+	}
 }
