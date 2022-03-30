@@ -13,8 +13,8 @@ CREATE TABLE IF NOT EXISTS `ims`.`customers` (
 
 CREATE TABLE IF NOT EXISTS `ims`.`items` (
     `id` INT(11) NOT NULL AUTO_INCREMENT,
-    `dessert_type` VARCHAR(40) NOT NULL,
-    `dessert_name` VARCHAR(40) NOT NULL,
+    `type` VARCHAR(40) NOT NULL,
+    `name` VARCHAR(40) NOT NULL,
     `description` VARCHAR(256),
     `cost` DECIMAL(4,2) NOT NULL,
     PRIMARY KEY (`id`)
