@@ -74,4 +74,12 @@ public class ItemDAOTest {
 		final Item updated = new Item (2L, "Cake", "Chocolate fudge cake", "Chocolatey fudge cake", 4.89);
 		assertEquals(updated, DAO.update(updated));
 	}
+	
+	
+	/*
+	 * Test the delete method
+	 */
+	public void testDelete() {
+		assertEquals(1, DAO.delete(1));
+	}
 }
