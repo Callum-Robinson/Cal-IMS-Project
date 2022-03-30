@@ -71,7 +71,7 @@ public class ItemControllerTest {
 	
 	
 	/*
-	 * Test the update method by mocking the user input and DAO update method
+	 * Test the update method in the Item controller by mocking the user input and DAO update method
 	 */
 	@Test
 	public void testUpdate() {
@@ -82,11 +82,28 @@ public class ItemControllerTest {
 		Mockito.when(utils.getDouble()).thenReturn(updated.getCost());
 		Mockito.when(dao.update(updated)).thenReturn(updated);
 		
-		assertEquals(updated, controller.update());
+		assertEquals(updated, this.controller.update());
 		
 		Mockito.verify(utils, Mockito.times(1)).getLong();
 		Mockito.verify(utils, Mockito.times(3)).getString();
 		Mockito.verify(utils, Mockito.times(1)).getDouble();
 		Mockito.verify(dao, Mockito.times(1)).update(updated);
+	}
+	
+	
+	/*
+	 * Test the delete method in the Item controller by mocking the user input and the DAO delete method
+	 */
+	@Test
+	public void testDelete() {
+		final long ID = 1L;
+		
+		Mockito.when(utils.getLong()).thenReturn(ID);
+		Mockito.when(dao.delete(ID)).thenReturn(1);
+		
+		assertEquals(1, this.controller.delete());
+		
+		Mockito.verify(utils, Mockito.times(1)).getLong();
+		Mockito.verify(dao, Mockito.times(1)).delete(ID);
 	}
 }
