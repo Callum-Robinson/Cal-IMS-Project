@@ -24,7 +24,7 @@ public class Item {
 	
 
 	/*
-	 * Other constructors
+	 * Constructor without id parameter
 	 */	
 	public Item(String type, String name, String description, Double cost) {
 		super();
