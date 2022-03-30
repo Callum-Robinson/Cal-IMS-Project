@@ -10,41 +10,28 @@ public class Item {
 	private String description;
 	private Double cost;
 	
-	// Constructor with crucial fields
-	public Item(String type, String name, Double cost) {
-		this.type = type;
-		this.name = name;
-		this.cost = cost;
-	}
 	
 	/*
 	 * Constructor with all fields
 	 */
 	public Item(Long id, String type, String name, String description, Double cost) {
-		this.id = id;
-		this.type = type;
-		this.name = name;
-		this.description = description;
-		this.cost = cost;
+		this.setId(id);
+		this.setType(type);
+		this.setName(name);
+		this.setDescription(description);
+		this.setCost(cost);
 	}
 	
 
 	/*
 	 * Other constructors
-	 */
-	public Item(Long id, String type, String name, Double cost) {
-		this.id = id;
-		this.type = type;
-		this.name = name;
-		this.cost = cost;
-	}
-	
+	 */	
 	public Item(String type, String name, String description, Double cost) {
 		super();
-		this.type = type;
-		this.name = name;
-		this.description = description;
-		this.cost = cost;
+		this.setType(type);
+		this.setName(name);
+		this.setDescription(description);
+		this.setCost(cost);
 	}
 	
 	

@@ -77,17 +77,17 @@ public class ItemControllerTest {
 	public void testUpdate() {
 		Item updated = new Item (2L, "Cake", "Chocolate fudge cake", "Chocolatey fudge cake", 4.89);
 		
-		Mockito.when(utils.getLong()).thenReturn(2L);
-		Mockito.when(utils.getString()).thenReturn(updated.getType(), updated.getName(), updated.getDescription());
-		Mockito.when(utils.getDouble()).thenReturn(updated.getCost());
-		Mockito.when(dao.update(updated)).thenReturn(updated);
+		Mockito.when(this.utils.getLong()).thenReturn(2L);
+		Mockito.when(this.utils.getString()).thenReturn(updated.getType(), updated.getName(), updated.getDescription());
+		Mockito.when(this.utils.getDouble()).thenReturn(updated.getCost());
+		Mockito.when(this.dao.update(updated)).thenReturn(updated);
 		
 		assertEquals(updated, this.controller.update());
 		
-		Mockito.verify(utils, Mockito.times(1)).getLong();
-		Mockito.verify(utils, Mockito.times(3)).getString();
-		Mockito.verify(utils, Mockito.times(1)).getDouble();
-		Mockito.verify(dao, Mockito.times(1)).update(updated);
+		Mockito.verify(this.utils, Mockito.times(1)).getLong();
+		Mockito.verify(this.utils, Mockito.times(3)).getString();
+		Mockito.verify(this.utils, Mockito.times(1)).getDouble();
+		Mockito.verify(this.dao, Mockito.times(1)).update(updated);
 	}
 	
 	

@@ -70,8 +70,9 @@ public class ItemDAOTest {
 	/*
 	 * Test the update method
 	 */
+	@Test
 	public void testUpdate() {
-		final Item updated = new Item (2L, "Cake", "Chocolate fudge cake", "Chocolatey fudge cake", 4.89);
+		final Item updated = new Item(1L, "Cake", "Chocolate fudge cake", "Chocolatey fudge cake", 4.89);
 		assertEquals(updated, DAO.update(updated));
 	}
 	
@@ -79,6 +80,7 @@ public class ItemDAOTest {
 	/*
 	 * Test the delete method
 	 */
+	@Test
 	public void testDelete() {
 		assertEquals(1, DAO.delete(1));
 	}
