@@ -2,6 +2,9 @@ package com.qa.ims.controllers;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -31,7 +34,7 @@ public class ItemControllerTest {
 	
 	
 	/*
-	 * Test the create method in the Item controller by mocking the user input
+	 * Test the create method in the Item controller by mocking the user input and the DAO create method
 	 */
 	@Test
 	public void testCreate(){
@@ -48,7 +51,21 @@ public class ItemControllerTest {
 		Mockito.verify(utils, Mockito.times(3)).getString();
 		Mockito.verify(utils, Mockito.times(1)).getDouble();
 		Mockito.verify(dao, Mockito.times(1)).create(created);
-		
 	}
 	
+	
+	/*
+	 * Test the read all method in the Item controller by mocking the DAO read all method
+	 */
+	@Test
+	public void testReadAll() {
+		List <Item> items = new ArrayList<>();
+		items.add(new Item (1L, "Ice cream", "Strawberry ice cream", "Classic strawberry flavoured ice cream", 2.99));
+		
+		Mockito.when(dao.readAll()).thenReturn(items);
+		
+		assertEquals(items, controller.readAll());
+		
+		Mockito.verify(dao, Mockito.times(1)).readAll();
+	}
 }
