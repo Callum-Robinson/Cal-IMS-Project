@@ -16,6 +16,7 @@ import com.qa.ims.utils.DBUtils;
 public class OrderDAO implements Dao<Order> {
 
 	public static final Logger LOGGER = LogManager.getLogger();
+	OrderItemDAO orderItemDAO = new OrderItemDAO();
 	
 	/*
 	 * Models the Order object from a database result set
@@ -29,7 +30,7 @@ public class OrderDAO implements Dao<Order> {
 		Long id = resultSet.getLong("id");
 		Long customerId = resultSet.getLong("customer_id");
 		Date datePlaced = resultSet.getDate("date_placed");
-		return new Order(id, customerId, datePlaced);
+		return new Order(id, customerId, datePlaced, orderItemDAO.readAllInOrder(id));
 	}
 	
 	
@@ -52,6 +53,14 @@ public class OrderDAO implements Dao<Order> {
 	}
 	
 	
+	/*
+	 * Creates an order in the database
+	 */
+	@Override
+	public Order create(Order t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	@Override
 	public List<Order> readAll() {
@@ -65,11 +74,6 @@ public class OrderDAO implements Dao<Order> {
 		return null;
 	}
 
-	@Override
-	public Order create(Order t) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public Order update(Order t) {

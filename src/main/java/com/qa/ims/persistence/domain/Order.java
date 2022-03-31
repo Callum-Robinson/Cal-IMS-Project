@@ -1,6 +1,8 @@
 package com.qa.ims.persistence.domain;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Order {
@@ -8,24 +10,26 @@ public class Order {
 	private Long id;
 	private Long customerId;
 	private Date datePlaced;
-	
+	private List<OrderItem> orderItems = new ArrayList<>();
 	
 	/*
 	 * Constructors
 	 */
-	public Order(Long id, Long customerId, Date datePlaced) {
+	public Order(Long id, Long customerId, Date datePlaced, List<OrderItem> orderItems) {
 		super();
 		this.setId(id);
 		this.setCustomerId(customerId);
 		this.setDatePlaced(datePlaced);
+		this.setOrderItems(orderItems);
 	}
 	
 	
 	
-	public Order(Long customerId, Date datePlaced) {
+	public Order(Long customerId, Date datePlaced, List<OrderItem> orderItems) {
 		super();
 		this.setCustomerId(customerId);
 		this.setDatePlaced(datePlaced);
+		this.setOrderItems(orderItems);
 	}
 
 
@@ -61,23 +65,33 @@ public class Order {
 	public void setDatePlaced(Date datePlaced) {
 		this.datePlaced = datePlaced;
 	}
-
-
-
 	
-	/*
-	 * Generate the toString, hashcode and equals overrides
-	 */
-	@Override
-	public String toString() {
-		return "Order [id=" + id + ", customerId=" + customerId + ", datePlaced=" + datePlaced + "]";
+	
+	public List<OrderItem> getOrderItems() {
+		return orderItems;
 	}
 
 
 
+	public void setOrderItems(List<OrderItem> orderItems) {
+		this.orderItems = orderItems;
+	}
+
+
+	/*
+	 * Generate the toString, hashcode and equals overrides
+	 */
+
+	@Override
+	public String toString() {
+		return "Order [id=" + id + ", customerId=" + customerId + ", datePlaced=" + datePlaced + ", orderItems="
+				+ orderItems + "]";
+	}
+
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(customerId, datePlaced, id);
+		return Objects.hash(customerId, datePlaced, id, orderItems);
 	}
 
 
@@ -92,11 +106,7 @@ public class Order {
 			return false;
 		Order other = (Order) obj;
 		return Objects.equals(customerId, other.customerId) && Objects.equals(datePlaced, other.datePlaced)
-				&& Objects.equals(id, other.id);
+				&& Objects.equals(id, other.id) && Objects.equals(orderItems, other.orderItems);
 	}
-	
-	
-	
-	
 	
 }
