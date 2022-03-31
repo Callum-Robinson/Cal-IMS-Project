@@ -18,7 +18,7 @@ public class OrderItemController {
 	 * The OrderItem controller requires the OrderItemDAO and utils
 	 */
 	private OrderItemDAO orderItemDao;
-	private Utils utils;
+	private Utils utils = new Utils();;
 	
 	
 	/*
@@ -34,11 +34,9 @@ public class OrderItemController {
 	/*
 	 * Creates a list of items and quantities with user entered fields
 	 * 
-	 * @param orderId - takes the order id to add items to
-	 * 
 	 * @return the list of OrderItems
 	 */
-	public List<OrderItem> add(Long orderId) {
+	public List<OrderItem> add() {
 		boolean addMore = true;
 		List<OrderItem> orderItems = new ArrayList<>();
 		
@@ -48,17 +46,17 @@ public class OrderItemController {
 			LOGGER.info("Please enter the quantity ordered");
 			Integer quantity = utils.getInteger();
 			
-			orderItems.add(new OrderItem(orderId, itemId, quantity));
+			orderItems.add(new OrderItem(itemId, quantity));
 			
 			boolean yesOrNoGiven = false;
 			
 			while (!yesOrNoGiven) {
 				LOGGER.info("Do you wish to add another");
 				String userAnswer = utils.getString().toUpperCase();
-				if (userAnswer == "NO") {
+				if (userAnswer.equalsIgnoreCase("no")) {
 					addMore = false;
 					yesOrNoGiven = true;
-				} else if (userAnswer == "Yes") {
+				} else if (userAnswer.equalsIgnoreCase("yes")) {
 					yesOrNoGiven = true;
 				} else {
 					LOGGER.info("Please give a yes or no");
@@ -67,6 +65,6 @@ public class OrderItemController {
 			
 		}
 		
-		return null;
+		return orderItems;
 	}
 }

@@ -48,8 +48,19 @@ public class OrderItem {
 		this.itemId = itemId;
 		this.quantity = quantity;
 	}
+	
+
+	/*
+	 * Constructor with just item_id and quantity
+	 */
+	public OrderItem(Long itemId, Integer quantity) {
+		super();
+		this.itemId = itemId;
+		this.quantity = quantity;
+	}
 
 
+	
 	/*
 	 * Getters and Setters
 	 */

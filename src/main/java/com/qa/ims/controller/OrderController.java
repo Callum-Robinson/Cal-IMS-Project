@@ -1,17 +1,16 @@
 package com.qa.ims.controller;
 
-import java.sql.Date;
 import java.time.LocalDate;
-import java.time.Month;
-import java.util.Calendar;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.qa.ims.persistence.dao.OrderDAO;
+import com.qa.ims.persistence.dao.OrderItemDAO;
 import com.qa.ims.persistence.domain.Order;
 import com.qa.ims.persistence.domain.OrderChoice;
+import com.qa.ims.persistence.domain.OrderItem;
 import com.qa.ims.utils.Utils;
 
 public class OrderController implements CrudController<Order> {
@@ -22,7 +21,15 @@ public class OrderController implements CrudController<Order> {
 	 * The Order controller requires the Order DAO and utils
 	 */
 	private OrderDAO orderDAO;
-	private Utils utils;
+	private Utils utils = new Utils();
+	
+	
+	/*
+	 * The Order controller needs requires the OrderItem controller
+	 */
+	OrderItemDAO orderItemDAO = new OrderItemDAO();
+	OrderItemController orderItemController = new OrderItemController(orderItemDAO, utils);
+	
 	
 	/*
 	 * Generated constructor from two fields
@@ -69,10 +76,11 @@ public class OrderController implements CrudController<Order> {
 			switch (choice) {
 			case ORDER:
 				LOGGER.info("Please enter the customer id");
-				String customerId = utils.getString();
+				Long customerId = utils.getLong();
 				LocalDate datePlaced = dateSetter();
-				
-				return null;
+				List<OrderItem> orderItems = orderItemController.add();
+				Order order = orderDAO.create(new Order(customerId, datePlaced, orderItems));
+				return order;
 			case ITEM:
 				LOGGER.info("Do That");
 				return null;
