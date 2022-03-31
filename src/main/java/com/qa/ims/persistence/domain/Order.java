@@ -31,6 +31,21 @@ public class Order {
 		this.setDatePlaced(datePlaced);
 		this.setOrderItems(orderItems);
 	}
+	
+	
+	public Order(Long id, Long customerId, LocalDate datePlaced) {
+		super();
+		this.id = id;
+		this.customerId = customerId;
+		this.datePlaced = datePlaced;
+	}
+	
+	
+	public Order(Long customerId, LocalDate datePlaced) {
+		super();
+		this.customerId = customerId;
+		this.datePlaced = datePlaced;
+	}
 
 
 

@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.sql.Statement;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -16,77 +16,69 @@ import com.qa.ims.utils.DBUtils;
 public class OrderItemDAO {
 
 	public static final Logger LOGGER = LogManager.getLogger();
-	
-	
-	/*
-	 * Models the joining of item objects with quantity for the order
-	 * 
-	 * @param resultset - takes in result set, the data for the each column is added to the appropriate field
-	 * 
-	 * @return an instance of OrderItem using the constructor with no order id
-	 */
-	
+
 	public OrderItem modelFromResultSet(ResultSet resultSet) throws SQLException {
-		Long itemId = resultSet.getLong("i.id");
-		String itemType = resultSet.getString("i.type");
-		String itemName = resultSet.getString("i.name");
-		Double itemCost = resultSet.getDouble("i.cost");
-		Integer quantity = resultSet.getInt("oi.quantity");
-		return new OrderItem(itemId, itemType, itemName, itemCost, quantity);
+		Long orderId = resultSet.getLong("order_id");
+		Long itemId = resultSet.getLong("item_id");
+		Integer quantity = resultSet.getInt("quantity");
+		return new OrderItem(orderId, itemId, quantity);
 	}
 	
 	
-	/*
-	 * Read all items in the Order and the quantity
-	 * 
-	 * @param orderID - takes the id of the order
-	 * 
-	 * @return a list of OrderItems, if exception caught return null
-	 */
-	public List<OrderItem> readAllIn(Long orderID) {
+	public OrderItem readLatest() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
-				PreparedStatement statement = connection.prepareStatement
-						("SELECT i.id, i.type, i.name, i.cost, oi.quantity FROM orderitems oi JOIN orders o "
-								+ "ON oi.item_id = i.id WHERE oi.order_id = ?");) {
-			statement.setLong(1, orderID);
-			
-			List<OrderItem> orderItems = new ArrayList<>();
-			
-			try (ResultSet resultSet = statement.executeQuery();) {
-				while (resultSet.next()) {
-					orderItems.add(modelFromResultSet(resultSet));
-				}
-				return orderItems;
-			}
+				Statement statement = connection.createStatement();
+				ResultSet resultSet = statement.executeQuery
+						("SELECT * FROM orderitems ORDER BY order_id, item_id DESC LIMIT 1");) {
+			resultSet.next();
+			return modelFromResultSet(resultSet);
 		} catch (Exception e) {
 			LOGGER.debug(e);
-			LOGGER.error(e.getMessage());
+			LOGGER.error(e);
 		}
 		return null;
 	}
 
+
 	
-	
-	/*
-	 * Adds items and their quantity to the database
-	 * 
-	 * @param orderId and orderItems - takes the id of the order and the list of items and their quantity
-	 */
-	public void add(Long orderId, List<OrderItem> orderItems) {
+	public OrderItem create(OrderItem orderItem) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection.prepareStatement
 						("INSERT INTO orderitems(order_id, item_id, quantity) VALUES (?, ?, ?)");) {
-			for (OrderItem orderItem : orderItems) {
-				statement.setLong(1, orderItem.getOrderId());
-				statement.setLong(2, orderItem.getItemId());
-				statement.setInt(3, orderItem.getQuantity());
-				statement.executeUpdate();
-			}
-		} catch (Exception e ) {
+			statement.setLong(1, orderItem.getOrderId());
+			statement.setLong(2, orderItem.getItemId());
+			statement.setInt(3, orderItem.getQuantity());
+			statement.executeUpdate();
+			return readLatest();
+		} catch (Exception e) {
 			LOGGER.debug(e);
-			LOGGER.error(e.getMessage());
+			LOGGER.error(e);
 		}
+		return null;
+	}
+	
+	
+	public List<OrderItem> readAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	
+
+	public OrderItem read(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	public OrderItem update(OrderItem t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public int delete(long id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

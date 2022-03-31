@@ -25,13 +25,6 @@ public class OrderController implements CrudController<Order> {
 	
 	
 	/*
-	 * The Order controller needs requires the OrderItem controller
-	 */
-	OrderItemDAO orderItemDAO = new OrderItemDAO();
-	OrderItemController orderItemController = new OrderItemController(orderItemDAO, utils);
-	
-	
-	/*
 	 * Generated constructor from two fields
 	 */
 	public OrderController(OrderDAO orderDAO, Utils utils) {
@@ -66,34 +59,33 @@ public class OrderController implements CrudController<Order> {
 	@Override
 	public Order create() {
 		
-		OrderChoice choice = null;
-		do {
-			LOGGER.info("Which would you like to create?");
-			OrderChoice.printOrderChoices();
-			
-			choice = OrderChoice.getOrderChoice(utils);
-			
-			switch (choice) {
-			case ORDER:
+//		OrderChoice choice = null;
+//		do {
+//			LOGGER.info("Which would you like to create?");
+//			OrderChoice.printOrderChoices();
+//			
+//			choice = OrderChoice.getOrderChoice(utils);
+//			
+//			switch (choice) {
+//			case ORDER:
 				LOGGER.info("Please enter the customer id");
 				Long customerId = utils.getLong();
 				LocalDate datePlaced = dateSetter();
-				List<OrderItem> orderItems = orderItemController.add();
-				Order order = orderDAO.create(new Order(customerId, datePlaced, orderItems));
+				Order order = orderDAO.create(new Order(customerId, datePlaced));
 				return order;
-			case ITEM:
-				LOGGER.info("Do That");
-				return null;
-			case STOP:
-				return null;
-			default:
-				LOGGER.info("ERROR");
-				break;
-			}
-			
-		} while (choice != OrderChoice.STOP);
-		
-		return null;
+//			case ITEM:
+//				LOGGER.info("Do That");
+//				return null;
+//			case STOP:
+//				return null;
+//			default:
+//				LOGGER.info("ERROR");
+//				break;
+//			}
+//			
+//		} while (choice != OrderChoice.STOP);
+//		
+//		return null;
 	}
 	
 	

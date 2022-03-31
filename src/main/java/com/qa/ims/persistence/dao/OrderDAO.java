@@ -17,8 +17,6 @@ import com.qa.ims.utils.DBUtils;
 public class OrderDAO implements Dao<Order> {
 
 	public static final Logger LOGGER = LogManager.getLogger();
-	OrderItemDAO orderItemDAO = new OrderItemDAO();
-	
 	/*
 	 * Models the Order object from a database result set
 	 * 
@@ -31,7 +29,7 @@ public class OrderDAO implements Dao<Order> {
 		Long id = resultSet.getLong("id");
 		Long customerId = resultSet.getLong("customer_id");
 		LocalDate datePlaced = resultSet.getDate("date_placed").toLocalDate();
-		return new Order(id, customerId, datePlaced, orderItemDAO.readAllIn(id));
+		return new Order(id, customerId, datePlaced);
 	}
 	
 	
@@ -68,7 +66,6 @@ public class OrderDAO implements Dao<Order> {
 			statement.setObject(2, order.getDatePlaced());
 			statement.executeUpdate();
 			
-			orderItemDAO.add(order.getId(), order.getOrderItems());
 			return readLatest();
 		} catch (Exception e) {
 			LOGGER.debug(e);
