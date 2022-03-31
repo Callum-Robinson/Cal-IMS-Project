@@ -1,6 +1,6 @@
 package com.qa.ims.persistence.domain;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -9,13 +9,13 @@ public class Order {
 	
 	private Long id;
 	private Long customerId;
-	private Date datePlaced;
+	private LocalDate datePlaced;
 	private List<OrderItem> orderItems = new ArrayList<>();
 	
 	/*
 	 * Constructors
 	 */
-	public Order(Long id, Long customerId, Date datePlaced, List<OrderItem> orderItems) {
+	public Order(Long id, Long customerId,LocalDate datePlaced, List<OrderItem> orderItems) {
 		super();
 		this.setId(id);
 		this.setCustomerId(customerId);
@@ -25,7 +25,7 @@ public class Order {
 	
 	
 	
-	public Order(Long customerId, Date datePlaced, List<OrderItem> orderItems) {
+	public Order(Long customerId, LocalDate datePlaced, List<OrderItem> orderItems) {
 		super();
 		this.setCustomerId(customerId);
 		this.setDatePlaced(datePlaced);
@@ -57,12 +57,12 @@ public class Order {
 	}
 
 
-	public Date getDatePlaced() {
+	public LocalDate getDatePlaced() {
 		return datePlaced;
 	}
 
 
-	public void setDatePlaced(Date datePlaced) {
+	public void setDatePlaced(LocalDate datePlaced) {
 		this.datePlaced = datePlaced;
 	}
 	

@@ -1,5 +1,8 @@
 package com.qa.ims.controller;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.Calendar;
 import java.util.List;
 
@@ -31,6 +34,17 @@ public class OrderController implements CrudController<Order> {
 	}
 	
 	
+	public LocalDate dateSetter() {
+		
+		LOGGER.info("Enter the day date for when the order was placed");
+		int dayOfMonth = utils.getInteger();
+		LOGGER.info("Enter the month date for when the order was placed");
+		int monthOfYear = utils.getInteger();
+		LOGGER.info("Enter the year for when the order was placed");
+		int year = utils.getInteger();
+		return LocalDate.of(year, monthOfYear, dayOfMonth);
+	}
+	
 	/*
 	 * Creates an order instance with user entered fields
 	 * Gives option to add a whole order or just an order item
@@ -49,12 +63,9 @@ public class OrderController implements CrudController<Order> {
 			
 			switch (choice) {
 			case ORDER:
-				Calendar c = Calendar.getInstance();
-				
 				LOGGER.info("Please enter the customer id");
 				String customerId = utils.getString();
-				LOGGER.info("Enter the month the order was placed");
-				c.set(Calendar.MONTH, utils.getInteger());
+				
 				
 				return null;
 			case ITEM:
