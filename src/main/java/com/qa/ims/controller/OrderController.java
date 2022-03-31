@@ -34,6 +34,11 @@ public class OrderController implements CrudController<Order> {
 	}
 	
 	
+	/*
+	 * Sets the date from user input
+	 * 
+	 * @return date and a LocalDate object
+	 */
 	public LocalDate dateSetter() {
 		
 		LOGGER.info("Enter the day date for when the order was placed");
@@ -65,7 +70,7 @@ public class OrderController implements CrudController<Order> {
 			case ORDER:
 				LOGGER.info("Please enter the customer id");
 				String customerId = utils.getString();
-				
+				LocalDate datePlaced = dateSetter();
 				
 				return null;
 			case ITEM:
