@@ -1,5 +1,6 @@
 package com.qa.ims.controller;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -48,8 +49,12 @@ public class OrderController implements CrudController<Order> {
 			
 			switch (choice) {
 			case ORDER:
+				Calendar c = Calendar.getInstance();
+				
 				LOGGER.info("Please enter the customer id");
 				String customerId = utils.getString();
+				LOGGER.info("Enter the month the order was placed");
+				c.set(Calendar.MONTH, utils.getInteger());
 				
 				return null;
 			case ITEM:
