@@ -1,6 +1,7 @@
 package com.qa.ims.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -21,8 +22,9 @@ public class OrderController implements CrudController<Order> {
 	 * The Order controller requires the Order DAO and utils
 	 */
 	private OrderDAO orderDAO;
+	private OrderItemDAO orderItemDAO = new OrderItemDAO();
 	private Utils utils = new Utils();
-	
+	private OrderItemController orderItemController = new OrderItemController(orderItemDAO, utils);
 	
 	/*
 	 * Generated constructor from two fields
@@ -72,6 +74,29 @@ public class OrderController implements CrudController<Order> {
 				Long customerId = utils.getLong();
 				LocalDate datePlaced = dateSetter();
 				Order order = orderDAO.create(new Order(customerId, datePlaced));
+				
+				List<OrderItem> orderItems = new ArrayList<>();
+				boolean addMore = true;
+				
+				while (addMore) {
+					orderItems.add(orderItemController.create(order.getId()));
+					
+					boolean yesOrNoGiven = false;
+					
+					while (!yesOrNoGiven) {
+						LOGGER.info("Do you wish to add another");
+						String userAnswer = utils.getString().toUpperCase();
+						
+						if (userAnswer.equalsIgnoreCase("no")) {
+							addMore = false;
+							yesOrNoGiven = true;
+						} else if (userAnswer.equalsIgnoreCase("yes")) {
+							yesOrNoGiven = true;
+						} else {
+							LOGGER.info("Please give a yes or no");
+						}
+					}
+				}
 				return order;
 //			case ITEM:
 //				LOGGER.info("Do That");

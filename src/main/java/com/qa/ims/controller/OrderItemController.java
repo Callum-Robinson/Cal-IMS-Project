@@ -14,8 +14,8 @@ public class OrderItemController {
 	/*
 	 * The OrderItem controller requires the OrderItemDAO and utils
 	 */
-	private OrderItemDAO orderItemDao;
-	private Utils utils = new Utils();;
+	private OrderItemDAO orderItemDAO;
+	private Utils utils = new Utils();
 	
 	
 	/*
@@ -23,22 +23,22 @@ public class OrderItemController {
 	 */
 	public OrderItemController(OrderItemDAO orderItemDao, Utils utils) {
 		super();
-		this.orderItemDao = orderItemDao;
+		this.orderItemDAO = orderItemDao;
 		this.utils = utils;
 	}
 	
 	
 	/*
-	 * Creates a list of items and quantities with user entered fields
+	 * Creates an order item with ids and quantity
 	 * 
-	 * @return the list of OrderItems
+	 * @return a OrderItem
 	 */
 	public OrderItem create(Long orderId) {
 		LOGGER.info("Please enter the item id");
 		Long itemId = utils.getLong();
 		LOGGER.info("Please enter the quantity of the item");
 		Integer quantity = utils.getInteger();
-		OrderItem orderItem = orderItemDao.create(new OrderItem(orderId, itemId, quantity));
+		OrderItem orderItem = orderItemDAO.create(new OrderItem(orderId, itemId, quantity));
 		LOGGER.info("Item added to order");
 		return orderItem;
 		
