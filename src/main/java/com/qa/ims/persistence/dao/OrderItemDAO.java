@@ -43,7 +43,7 @@ public class OrderItemDAO {
 	 * 
 	 * @return a list of OrderItems, if exception caught return null
 	 */
-	public List<OrderItem> readAllInOrder(Long orderID) {
+	public List<OrderItem> readAllIn(Long orderID) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection.prepareStatement
 						("SELECT i.id, i.type, i.name, i.cost, oi.quantity FROM orderitems oi JOIN orders o "
@@ -65,6 +65,28 @@ public class OrderItemDAO {
 		return null;
 	}
 
+	
+	
+	/*
+	 * Adds items and their quantity to the database
+	 * 
+	 * @param orderId and orderItems - takes the id of the order and the list of items and their quantity
+	 */
+	public void add(Long orderId, List<OrderItem> orderItems) {
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection.prepareStatement
+						("INSERT INTO orderitems(order_id, item_id, quantity) VALUES (?, ?, ?)");) {
+			for (OrderItem orderItem : orderItems) {
+				statement.setLong(1, orderItem.getOrderId());
+				statement.setLong(2, orderItem.getItemId());
+				statement.setInt(3, orderItem.getQuantity());
+				statement.executeUpdate();
+			}
+		} catch (Exception e ) {
+			LOGGER.debug(e);
+			LOGGER.error(e.getMessage());
+		}
+	}
 
 	
 }

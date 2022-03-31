@@ -2,6 +2,7 @@ package com.qa.ims.persistence.dao;
 
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -30,7 +31,7 @@ public class OrderDAO implements Dao<Order> {
 		Long id = resultSet.getLong("id");
 		Long customerId = resultSet.getLong("customer_id");
 		Date datePlaced = resultSet.getDate("date_placed");
-		return new Order(id, customerId, datePlaced, orderItemDAO.readAllInOrder(id));
+		return new Order(id, customerId, datePlaced, orderItemDAO.readAllIn(id));
 	}
 	
 	
@@ -55,10 +56,24 @@ public class OrderDAO implements Dao<Order> {
 	
 	/*
 	 * Creates an order in the database
+	 * 
+	 * @param order - takes in an order object
 	 */
 	@Override
-	public Order create(Order t) {
-		// TODO Auto-generated method stub
+	public Order create(Order order) {
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection.prepareStatement
+						("INSERT INTO orders(customer_id, date_placed) VALUES (?, ?)");) {
+			statement.setLong(1, order.getCustomerId());
+			statement.setDate(2, order.getDatePlaced());
+			statement.executeUpdate();
+			
+			orderItemDAO.add(order.getId(), order.getOrderItems());
+			return readLatest();
+		} catch (Exception e) {
+			LOGGER.debug(e);
+			LOGGER.error(e.getMessage());
+		}
 		return null;
 	}
 	

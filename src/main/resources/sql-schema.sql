@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `ims`.`items` (
 
 CREATE TABLE IF NOT EXISTS `ims`.`orders` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
-    `customer_id` INT(11) NOT NULL,
+    `customer_id` BIGINT NOT NULL,
     `date_placed` DATE DEFAULT(DATE(CURRENT_TIMESTAMP)),
     PRIMARY KEY (`id`),
     FOREIGN KEY (`customer_id`) REFERENCES `customers`(`id`)
