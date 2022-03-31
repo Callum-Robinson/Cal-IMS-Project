@@ -58,14 +58,12 @@ public class OrderItemDAO {
 	}
 	
 	
-	public List<OrderItem> readAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	public OrderItem read(Long id) {
-		// TODO Auto-generated method stub
+	public List<OrderItem> readAll(Long orderId) {
+		try(Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection.prepareStatement("SELECT oi.order_id, i.type, i.name, i.cost, oi.quantity FROM orderitems oi "
+						+ "JOIN items i ON oi.order_id = i.id WHERE oi.order_id = ?");) {		
+			statement.setLong(1, orderId);
+		}
 		return null;
 	}
 

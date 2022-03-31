@@ -10,7 +10,7 @@ public enum OrderChoice {
 	/*
 	 * Choose between orders, items in an order or to return
 	 */
-	ORDER("A whole order"), ITEM("Items in an order"), STOP("To return");
+	ORDER("A whole order"), ITEM("Items in an order"), RETURN("To return");
 	
 	private static final Logger LOGGER = LogManager.getLogger();
 	

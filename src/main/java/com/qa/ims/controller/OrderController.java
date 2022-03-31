@@ -129,7 +129,7 @@ public class OrderController implements CrudController<Order> {
 				}
 				order2.setOrderItems(orderItems2);
 				return order2;
-			case STOP:
+			case RETURN:
 				return null;
 				
 			default:
@@ -137,7 +137,7 @@ public class OrderController implements CrudController<Order> {
 				break;
 			}
 			
-		} while (choice != OrderChoice.STOP);
+		} while (choice != OrderChoice.RETURN);
 		
 		return null;
 	}

@@ -6,6 +6,10 @@ public class OrderItem {
 	private Long itemId;
 	private Integer quantity;
 	
+	private String itemType;
+	private String itemName;
+	private Double itemCost;
+	
 	
 	public OrderItem(Long orderId, Long itemId, Integer quantity) {
 		super();
@@ -21,6 +25,15 @@ public class OrderItem {
 		this.setQuantity(quantity);
 	}
 
+	
+	public OrderItem(Long itemId, Integer quantity, String itemType, String itemName, Double itemCost) {
+		super();
+		this.setItemId(itemId);
+		this.setQuantity(quantity);
+		this.setItemType(itemType);
+		this.setItemName(itemName);
+		this.setItemCost(itemCost);
+	}
 
 	
 	public Long getOrderId() {
@@ -51,11 +64,42 @@ public class OrderItem {
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
+	
+
+	public String getItemType() {
+		return itemType;
+	}
+
+
+	public void setItemType(String itemType) {
+		this.itemType = itemType;
+	}
+
+
+	public String getItemName() {
+		return itemName;
+	}
+
+
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+
+
+	public Double getItemCost() {
+		return itemCost;
+	}
+
+
+	public void setItemCost(Double itemCost) {
+		this.itemCost = itemCost;
+	}
 
 
 	@Override
 	public String toString() {
-		return "OrderItem [itemId=" + itemId + ", quantity=" + quantity + "]";
+		return "OrderItem [itemId=" + itemId + ", quantity=" + quantity + ", itemType=" + itemType + ", itemName="
+				+ itemName + ", itemCost=" + itemCost + "]";
 	}
 	
 	
