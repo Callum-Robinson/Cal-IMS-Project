@@ -61,15 +61,15 @@ public class OrderController implements CrudController<Order> {
 	@Override
 	public Order create() {
 		
-//		OrderChoice choice = null;
-//		do {
-//			LOGGER.info("Which would you like to create?");
-//			OrderChoice.printOrderChoices();
-//			
-//			choice = OrderChoice.getOrderChoice(utils);
-//			
-//			switch (choice) {
-//			case ORDER:
+		OrderChoice choice = null;
+		do {
+			LOGGER.info("Which would you like to create?");
+			OrderChoice.printOrderChoices();
+			
+			choice = OrderChoice.getOrderChoice(utils);
+			
+			switch (choice) {
+			case ORDER:
 				LOGGER.info("Please enter the customer id");
 				Long customerId = utils.getLong();
 				LocalDate datePlaced = dateSetter();
@@ -85,7 +85,7 @@ public class OrderController implements CrudController<Order> {
 					
 					while (!yesOrNoGiven) {
 						LOGGER.info("Do you wish to add another");
-						String userAnswer = utils.getString().toUpperCase();
+						String userAnswer = utils.getString();
 						
 						if (userAnswer.equalsIgnoreCase("no")) {
 							addMore = false;
@@ -97,20 +97,49 @@ public class OrderController implements CrudController<Order> {
 						}
 					}
 				}
+				order.setOrderItems(orderItems);
 				return order;
-//			case ITEM:
-//				LOGGER.info("Do That");
-//				return null;
-//			case STOP:
-//				return null;
-//			default:
-//				LOGGER.info("ERROR");
-//				break;
-//			}
-//			
-//		} while (choice != OrderChoice.STOP);
-//		
-//		return null;
+				
+			case ITEM:
+				LOGGER.info("Enter the id of the order");
+				Long orderId = utils.getLong();
+				Order order2 = orderDAO.read(orderId);
+				
+				List<OrderItem> orderItems2 = new ArrayList<>();
+				boolean addMore2 = true;
+				
+				while (addMore2) {
+					orderItems2.add(orderItemController.create(order2.getId()));
+					
+					boolean yesOrNoGiven2 = false;
+					
+					while (!yesOrNoGiven2) {
+						LOGGER.info("Do you wish to add another");
+						String userAnswer2 = utils.getString();
+						
+						if (userAnswer2.equalsIgnoreCase("no")) {
+							addMore2 = false;
+							yesOrNoGiven2 = true;
+						} else if (userAnswer2.equalsIgnoreCase("yes")) {
+							yesOrNoGiven2 = true;
+						} else {
+							LOGGER.info("Please give a yes or no");
+						}
+					}
+				}
+				order2.setOrderItems(orderItems2);
+				return order2;
+			case STOP:
+				return null;
+				
+			default:
+				LOGGER.info("ERROR");
+				break;
+			}
+			
+		} while (choice != OrderChoice.STOP);
+		
+		return null;
 	}
 	
 	

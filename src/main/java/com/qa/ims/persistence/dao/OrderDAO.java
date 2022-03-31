@@ -74,17 +74,30 @@ public class OrderDAO implements Dao<Order> {
 		return null;
 	}
 	
+	
+	@Override
+	public Order read(Long id) {
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection.prepareStatement("SELECT * FROM orders WHERE id = ?");) {
+			statement.setLong(1, id);
+			try (ResultSet resultSet = statement.executeQuery();) {
+				resultSet.next();
+				return modelFromResultSet(resultSet);
+			}
+		} catch (Exception e) {
+			LOGGER.debug(e);
+			LOGGER.error(e.getMessage());
+		}
+		return null;
+	}
+	
+	
 	@Override
 	public List<Order> readAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public Order read(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 
 	@Override
