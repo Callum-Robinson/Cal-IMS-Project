@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.qa.ims.persistence.dao.OrderDAO;
 import com.qa.ims.persistence.dao.OrderItemDAO;
+import com.qa.ims.persistence.domain.AddOrRemove;
 import com.qa.ims.persistence.domain.Order;
 import com.qa.ims.persistence.domain.OrderItem;
 import com.qa.ims.utils.Utils;
@@ -109,7 +110,57 @@ public class OrderController implements CrudController<Order> {
 
 	@Override
 	public Order update() {
-		// TODO Auto-generated method stub
+		AddOrRemove choice = null;
+
+		do {
+			LOGGER.info("What would you like to do?");
+			AddOrRemove.printOrderChoices();
+
+			choice = AddOrRemove.getAddOrRemove(utils);
+
+			switch (choice) {
+
+			case ADD:
+				LOGGER.info("Enter the id of the order");
+				Long orderId = utils.getLong();
+
+				Order order = orderDAO.read(orderId);
+				List<OrderItem> orderItems = new ArrayList<>();
+				boolean addMore = true;
+
+				while (addMore) {
+					orderItems.add(orderItemController.create(order.getId()));
+
+					boolean yesOrNoGiven = false;
+					while (!yesOrNoGiven) {
+						LOGGER.info("Do you wish to add another?");
+						String userAnswer = utils.getString();
+
+						if (userAnswer.equalsIgnoreCase("NO")) {
+							addMore = false;
+							yesOrNoGiven = true;
+						} else if (userAnswer.equalsIgnoreCase("YES")) {
+							yesOrNoGiven = true;
+						} else {
+							LOGGER.info("Please give a yes or no");
+						}
+					}
+				}
+				order.setOrderItems(orderItems);
+				return order;
+				
+				
+			case REMOVE:
+				LOGGER.info("DO THAT");
+
+			case RETURN:
+				return null;
+
+			default:
+				LOGGER.info("Invalid choice");
+				break;
+			}
+		} while (choice != AddOrRemove.RETURN);
 		return null;
 	}
 

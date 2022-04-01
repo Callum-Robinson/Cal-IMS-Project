@@ -10,7 +10,7 @@ public enum AddOrRemove {
 	/*
 	 * Choose between orders, items in an order or to return
 	 */
-	ORDER("A whole order"), ITEM("Items in an order"), RETURN("To return");
+	ADD("Add an item to an order"), REMOVE("Remove an item from an order"), RETURN("To return");
 	
 	private static final Logger LOGGER = LogManager.getLogger();
 	
