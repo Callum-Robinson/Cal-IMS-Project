@@ -137,7 +137,6 @@ public class ItemDAO implements Dao<Item> {
 	 * 
 	 * @return updated item using the read(id) method, if exception caught return null
 	 */
-	@Override
 	public Item update(Item item) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection.prepareStatement

@@ -105,7 +105,6 @@ public class CustomerDAO implements Dao<Customer> {
 	 *                 update that customer in the database
 	 * @return
 	 */
-	@Override
 	public Customer update(Customer customer) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection

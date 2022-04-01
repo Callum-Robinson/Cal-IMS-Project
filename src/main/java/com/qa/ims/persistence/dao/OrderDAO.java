@@ -122,15 +122,19 @@ public class OrderDAO implements Dao<Order> {
 
 
 
-	@Override
-	public Order update(Order t) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public int delete(long id) {
-		// TODO Auto-generated method stub
+		OrderItemDAO orderItemDAO = new OrderItemDAO();
+		orderItemDAO.delete(id);
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection.prepareStatement("DELETE FROM orders WHERE id = ?");) {
+			statement.setLong(1, id);
+			return statement.executeUpdate();
+		} catch (Exception e) {
+			LOGGER.debug(e);
+			LOGGER.error(e.getMessage());
+		}
 		return 0;
 	}
 

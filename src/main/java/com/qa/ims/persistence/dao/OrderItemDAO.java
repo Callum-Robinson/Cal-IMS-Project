@@ -93,15 +93,15 @@ public class OrderItemDAO {
 	}
 
 
-
-	public OrderItem update(OrderItem t) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	public int delete(long id) {
-		// TODO Auto-generated method stub
+	public int delete(Long orderId) {
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection.prepareStatement("DELETE FROM orderitems WHERE order_id = ?");) {
+			statement.setLong(1, orderId);
+			return statement.executeUpdate();
+		} catch (Exception e) {
+			LOGGER.debug(e);
+			LOGGER.error(e.getMessage());
+		}
 		return 0;
 	}
 }
