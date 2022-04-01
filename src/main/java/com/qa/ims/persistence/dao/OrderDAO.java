@@ -43,6 +43,7 @@ public class OrderDAO implements Dao<Order> {
 	}
 	
 	
+	
 	/*
 	 * Reads the latest order in the database and calls the method to model the order to a model object
 	 * 
@@ -139,4 +140,32 @@ public class OrderDAO implements Dao<Order> {
 	}
 
 
+	public int correctOrder(Long customerId) {
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection.prepareStatement("SELECT * FROM orders WHERE customer_id = ?");) {
+			statement.setLong(1, customerId);
+			ResultSet resultSet = statement.executeQuery();
+			if (resultSet.next()) {
+				Long orderId = modelFromResultSet(resultSet).getId();
+
+				OrderItemDAO orderItemDAO = new OrderItemDAO();
+				orderItemDAO.delete(orderId);
+			}
+		} catch (Exception e) {
+			LOGGER.debug(e);
+			LOGGER.error(e.getMessage());
+		}
+		
+		
+		
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection.prepareStatement("DELETE FROM orders WHERE customer_id = ?");) {
+			statement.setLong(1, customerId);
+			return statement.executeUpdate();
+		} catch (Exception e) {
+			LOGGER.debug(e);
+			LOGGER.error(e.getMessage());
+		}
+		return 0;
+	}
 }
