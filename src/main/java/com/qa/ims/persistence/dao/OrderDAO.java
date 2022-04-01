@@ -34,6 +34,15 @@ public class OrderDAO implements Dao<Order> {
 	}
 	
 	
+	public Order modelWithCustomer(ResultSet resultSet) throws SQLException {
+		Long id = resultSet.getLong("id");
+		Long customerId = resultSet.getLong("customer_id");
+		String customerName = resultSet.getString("first_name") + " " + resultSet.getString("surname");
+		LocalDate datePlaced = resultSet.getDate("date_placed").toLocalDate();
+		return new Order(id, customerId, customerName, datePlaced);
+	}
+	
+	
 	/*
 	 * Reads the latest order in the database and calls the method to model the order to a model object
 	 * 
@@ -97,10 +106,11 @@ public class OrderDAO implements Dao<Order> {
 	public List<Order> readAll() {
 		try(Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM orders");) {
+				ResultSet resultSet = statement.executeQuery("SELECT o.id, o.customer_id, c.first_name, c.surname, "
+						+ "o.date_placed FROM orders o JOIN customers c ON o.customer_id = c.id");) {
 			List<Order> orders = new ArrayList<>();
 			while (resultSet.next()) {
-				orders.add(modelFromResultSet(resultSet));
+				orders.add(modelWithCustomer(resultSet));
 			}
 			return orders;
 		} catch (SQLException e) {

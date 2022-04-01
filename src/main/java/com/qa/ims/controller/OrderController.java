@@ -100,6 +100,7 @@ public class OrderController implements CrudController<Order> {
 				order.setOrderItems(orderItems);
 				return order;
 				
+				
 			case ITEM:
 				LOGGER.info("Enter the id of the order");
 				Long orderId = utils.getLong();
@@ -127,6 +128,7 @@ public class OrderController implements CrudController<Order> {
 						}
 					}
 				}
+				
 				order2.setOrderItems(orderItems2);
 				return order2;
 			case RETURN:
@@ -146,8 +148,12 @@ public class OrderController implements CrudController<Order> {
 	
 	@Override
 	public List<Order> readAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Order> orders = orderDAO.readAll();
+		for (Order order : orders) {
+			order.setOrderItems(orderItemDAO.readAll(order.getId()));
+			LOGGER.info(order);
+		}
+		return orders;
 	}
 
 

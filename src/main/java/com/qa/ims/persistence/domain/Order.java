@@ -12,6 +12,8 @@ public class Order {
 	private LocalDate datePlaced;
 	private List<OrderItem> orderItems = new ArrayList<>();
 	
+	private String customerName;
+	
 	/*
 	 * Constructors
 	 */
@@ -35,19 +37,26 @@ public class Order {
 	
 	public Order(Long id, Long customerId, LocalDate datePlaced) {
 		super();
-		this.id = id;
-		this.customerId = customerId;
-		this.datePlaced = datePlaced;
+		this.setId(id);
+		this.setCustomerId(customerId);
+		this.setDatePlaced(datePlaced);
 	}
 	
 	
 	public Order(Long customerId, LocalDate datePlaced) {
 		super();
-		this.customerId = customerId;
-		this.datePlaced = datePlaced;
+		this.setCustomerId(customerId);
+		this.setDatePlaced(datePlaced);
 	}
 
 
+	public Order(Long id, Long customerId, String customerName, LocalDate datePlaced) {
+		super();
+		this.setId(id);
+		this.setCustomerId(customerId);
+		this.setCustomerName(customerName);
+		this.setDatePlaced(datePlaced);
+	}
 
 	/*
 	 * Getters and Setters
@@ -92,16 +101,27 @@ public class Order {
 		this.orderItems = orderItems;
 	}
 
+	
+	public String getCustomerName() {
+		return customerName;
+	}
 
+
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
+	
 	/*
 	 * Generate the toString, hashcode and equals overrides
 	 */
-
 	@Override
 	public String toString() {
-		return "Order [id=" + id + ", customerId=" + customerId + ", datePlaced=" + datePlaced + ", orderItems="
-				+ orderItems + "]";
+		return "Order [Id = " + id + ", Customer Id = " + customerId + ", Customer Name = " + customerName + ", Date Placed = "
+				+ datePlaced + ", Items in order = " + orderItems + "]";
 	}
+
 
 
 	@Override
