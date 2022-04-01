@@ -9,7 +9,7 @@ public class OrderItem {
 	private String itemType;
 	private String itemName;
 	private Double itemCost;
-	
+	private Double totalCostOfItem;
 	
 	public OrderItem(Long orderId, Long itemId, Integer quantity) {
 		super();
@@ -26,13 +26,14 @@ public class OrderItem {
 	}
 
 	
-	public OrderItem(Long itemId, String itemType, String itemName, Double itemCost,  Integer quantity) {
+	public OrderItem(Long itemId, String itemType, String itemName, Double itemCost,  Integer quantity , Double totalCostOfItem) {
 		super();
 		this.setItemId(itemId);
 		this.setItemType(itemType);
 		this.setItemName(itemName);
 		this.setItemCost(itemCost);
 		this.setQuantity(quantity);
+		this.setTotalCostOfItem(totalCostOfItem);
 	}
 
 	
@@ -93,6 +94,16 @@ public class OrderItem {
 
 	public void setItemCost(Double itemCost) {
 		this.itemCost = itemCost;
+	}
+	
+	
+	public Double getTotalCostOfItem() {
+		return totalCostOfItem;
+	}
+
+
+	public void setTotalCostOfItem(Double totalCostOfItem) {
+		this.totalCostOfItem = totalCostOfItem;
 	}
 
 
