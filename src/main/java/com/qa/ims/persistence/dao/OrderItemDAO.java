@@ -104,4 +104,19 @@ public class OrderItemDAO {
 		}
 		return 0;
 	}
+	
+	
+	public int delete(Long orderId, Long itemId) {
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection.prepareStatement
+						("DELETE FROM orderitems WHERE order_id = ? AND item_id = ?");) {
+			statement.setLong(1, orderId);
+			statement.setLong(2, itemId);
+			return statement.executeUpdate();
+		} catch (Exception e) {
+			LOGGER.debug(e);
+			LOGGER.error(e.getMessage());
+		}
+		return 0;
+	}
 }

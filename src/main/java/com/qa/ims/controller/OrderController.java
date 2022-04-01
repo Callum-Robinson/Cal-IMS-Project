@@ -151,7 +151,12 @@ public class OrderController implements CrudController<Order> {
 				
 				
 			case REMOVE:
-				LOGGER.info("DO THAT");
+				LOGGER.info("Please enter the id of the order you would like to delete");
+				Long orderId2 = utils.getLong();
+				LOGGER.info("Please enter the id of the item you would like to delete");
+				Long itemId = utils.getLong();
+				orderItemDAO.delete(orderId2, itemId);
+				return null;
 
 			case RETURN:
 				return null;
