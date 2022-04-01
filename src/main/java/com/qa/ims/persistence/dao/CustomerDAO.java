@@ -128,6 +128,8 @@ public class CustomerDAO implements Dao<Customer> {
 	 */
 	@Override
 	public int delete(long id) {
+		OrderDAO orderDAO = new OrderDAO();
+		orderDAO.correctOrder(id);
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection.prepareStatement("DELETE FROM customers WHERE id = ?");) {
 			statement.setLong(1, id);
