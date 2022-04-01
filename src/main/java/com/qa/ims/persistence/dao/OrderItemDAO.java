@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -22,6 +23,15 @@ public class OrderItemDAO {
 		Long itemId = resultSet.getLong("item_id");
 		Integer quantity = resultSet.getInt("quantity");
 		return new OrderItem(orderId, itemId, quantity);
+	}
+	
+	public OrderItem modelItemsFromResultSet(ResultSet resultSet) throws SQLException {
+		Long itemId = resultSet.getLong("item_id");
+		String itemType = resultSet.getString("type");
+		String itemName = resultSet.getString("name");
+		Double itemCost = resultSet.getDouble("cost");
+		Integer quantity = resultSet.getInt("quantity");
+		return new OrderItem(itemId, itemType, itemName, itemCost, quantity);
 	}
 	
 	
@@ -60,11 +70,26 @@ public class OrderItemDAO {
 	
 	public List<OrderItem> readAll(Long orderId) {
 		try(Connection connection = DBUtils.getInstance().getConnection();
-				PreparedStatement statement = connection.prepareStatement("SELECT oi.order_id, i.type, i.name, i.cost, oi.quantity FROM orderitems oi "
-						+ "JOIN items i ON oi.order_id = i.id WHERE oi.order_id = ?");) {		
+				PreparedStatement statement = connection.prepareStatement("SELECT oi.item_id, i.type, i.name, i.cost, oi.quantity FROM orderitems oi "
+						+ "JOIN items i ON oi.item_id = i.id WHERE oi.order_id = ?");) {		
 			statement.setLong(1, orderId);
+			List<OrderItem> orderItems = new ArrayList<>();
+			
+			try (ResultSet resultSet = statement.executeQuery();) {
+				while (resultSet.next()) {
+					orderItems.add(modelItemsFromResultSet(resultSet));
+				}
+				return orderItems;
+			}
+			
+		} catch (SQLException e) {
+			LOGGER.debug(e);
+			LOGGER.error(e);
+		} catch (Exception ex) {
+			LOGGER.debug(ex);
+			LOGGER.error(ex.getMessage());
 		}
-		return null;
+		return new ArrayList<>();
 	}
 
 

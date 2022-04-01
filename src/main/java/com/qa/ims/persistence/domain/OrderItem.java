@@ -26,13 +26,13 @@ public class OrderItem {
 	}
 
 	
-	public OrderItem(Long itemId, Integer quantity, String itemType, String itemName, Double itemCost) {
+	public OrderItem(Long itemId, String itemType, String itemName, Double itemCost,  Integer quantity) {
 		super();
 		this.setItemId(itemId);
-		this.setQuantity(quantity);
 		this.setItemType(itemType);
 		this.setItemName(itemName);
 		this.setItemCost(itemCost);
+		this.setQuantity(quantity);
 	}
 
 	
@@ -98,9 +98,10 @@ public class OrderItem {
 
 	@Override
 	public String toString() {
-		return "OrderItem [itemId=" + itemId + ", quantity=" + quantity + ", itemType=" + itemType + ", itemName="
-				+ itemName + ", itemCost=" + itemCost + "]";
+		return "OrderItem [itemId=" + itemId + ", itemType=" + itemType + ", itemName=" + itemName + ", itemCost="
+				+ itemCost + ", quantity=" + quantity + "]";
 	}
+
 	
 	
 }
