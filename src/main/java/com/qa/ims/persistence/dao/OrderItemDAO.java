@@ -31,7 +31,8 @@ public class OrderItemDAO {
 		String itemName = resultSet.getString("name");
 		Double itemCost = resultSet.getDouble("cost");
 		Integer quantity = resultSet.getInt("quantity");
-		return new OrderItem(itemId, itemType, itemName, itemCost, quantity);
+		Double totalCostOfItem = itemCost * quantity;
+		return new OrderItem(itemId, itemType, itemName, itemCost, quantity, totalCostOfItem);
 	}
 	
 	

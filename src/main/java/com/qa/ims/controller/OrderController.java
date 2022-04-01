@@ -102,7 +102,12 @@ public class OrderController implements CrudController<Order> {
 		List<Order> orders = orderDAO.readAll();
 		for (Order order : orders) {
 			order.setOrderItems(orderItemDAO.readAll(order.getId()));
+			Double orderTotalCost = 0d;
+			for (OrderItem orderItem : order.getOrderItems()) {
+				orderTotalCost += orderItem.getTotalCostOfItem();
+			}
 			LOGGER.info(order);
+			LOGGER.info("Total cost of order = " + orderTotalCost);
 		}
 		return orders;
 	}
