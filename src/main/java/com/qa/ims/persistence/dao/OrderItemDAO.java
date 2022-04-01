@@ -120,4 +120,18 @@ public class OrderItemDAO {
 		}
 		return 0;
 	}
+	
+	
+	public int correctTable(Long itemId) {
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection.prepareStatement
+						("DELETE FROM orderitems WHERE item_id = ?");) {
+			statement.setLong(1, itemId);
+			return statement.executeUpdate();
+		} catch (Exception e) {
+			LOGGER.debug(e);
+			LOGGER.error(e.getMessage());
+		}
+		return 0;
+	}
 }
