@@ -98,8 +98,8 @@ public class OrderItem {
 
 	@Override
 	public String toString() {
-		return "[Item Id = " + itemId + ", Item Type = " + itemType + ", Item Name = " + itemName + ", Item Cost = "
-				+ itemCost + ", Quantity = " + quantity + "]";
+		return "[Item Id: " + itemId + ", Item Type: " + itemType + ", Item Name: " + itemName + ", Item Cost: "
+				+ itemCost + ", Quantity: " + quantity + "]";
 	}
 
 	
