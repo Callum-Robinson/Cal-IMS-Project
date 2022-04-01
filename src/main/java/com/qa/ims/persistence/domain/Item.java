@@ -24,7 +24,7 @@ public class Item {
 	
 
 	/*
-	 * Other constructors
+	 * Constructor without id parameter
 	 */	
 	public Item(String type, String name, String description, Double cost) {
 		super();
@@ -84,8 +84,8 @@ public class Item {
 	 */
 	@Override
 	public String toString() {
-		return "Item [id=" + id + ", type=" + type + ", name=" + name + ", description=" + description + ", cost="
-				+ cost + "]";
+		return "Id: " + id + ", Type: " + type + ", Name: " + name + ", Description: " + description + ", Cost: "
+				+ cost;
 	}
 
 	@Override

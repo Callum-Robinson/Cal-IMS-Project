@@ -30,7 +30,7 @@ public class ItemController implements CrudController<Item> {
 	
 	
 	/*
-	 * Creates a item instance with the user entered fields
+	 * Creates an item instance with the user entered fields
 	 * 
 	 * @return the item
 	 */
