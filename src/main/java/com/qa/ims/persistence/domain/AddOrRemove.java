@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.qa.ims.utils.Utils;
 
-public enum OrderChoice {
+public enum AddOrRemove {
 
 	/*
 	 * Choose between orders, items in an order or to return
@@ -19,7 +19,7 @@ public enum OrderChoice {
 	/*
 	 * Constructor for the enum
 	 */
-	private OrderChoice(String description) {
+	private AddOrRemove(String description) {
 		this.description = description;
 	}
 	
@@ -34,7 +34,7 @@ public enum OrderChoice {
 	 * print choices
 	 */
 	public static void printOrderChoices() {
-		for (OrderChoice choice : OrderChoice.values()) {
+		for (AddOrRemove choice : AddOrRemove.values()) {
 			LOGGER.info(choice.getDescription());
 		}
 	}
@@ -47,11 +47,11 @@ public enum OrderChoice {
 	 * 
 	 * @return the choice
 	 */
-	public static OrderChoice getOrderChoice(Utils utils) {
-		OrderChoice choice;
+	public static AddOrRemove getAddOrRemove(Utils utils) {
+		AddOrRemove choice;
 		while (true) {
 			try {
-				choice = OrderChoice.valueOf(utils.getString().toUpperCase());
+				choice = AddOrRemove.valueOf(utils.getString().toUpperCase());
 				break;
 			} catch (IllegalArgumentException e) {
 				LOGGER.error("Invalid selection please try again");
