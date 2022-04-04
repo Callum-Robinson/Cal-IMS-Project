@@ -17,7 +17,7 @@ public class Order {
 	/*
 	 * Constructors
 	 */
-	public Order(Long id, Long customerId,LocalDate datePlaced, List<OrderItem> orderItems) {
+	public Order(Long id, Long customerId, LocalDate datePlaced, List<OrderItem> orderItems) {
 		super();
 		this.setId(id);
 		this.setCustomerId(customerId);
