@@ -18,6 +18,14 @@ public class OrderItemDAO {
 
 	public static final Logger LOGGER = LogManager.getLogger();
 
+	
+	/*
+	 * Models the OrderItem object from a database result set
+	 * 
+	 * @param resultset - takes in a result set, the data for each column is added to the appropriate field
+	 * 
+	 * @return the instance of OrderItem
+	 */
 	public OrderItem modelFromResultSet(ResultSet resultSet) throws SQLException {
 		Long orderId = resultSet.getLong("order_id");
 		Long itemId = resultSet.getLong("item_id");
@@ -25,6 +33,15 @@ public class OrderItemDAO {
 		return new OrderItem(orderId, itemId, quantity);
 	}
 	
+	
+	
+	/*
+	 * Models the OrderItem object from a database result set with the item information added
+	 * 
+	 * @param resultset - takes in a result set, the data for each column is added to the appropriate field
+	 * 
+	 * @return the instance of OrderItem
+	 */
 	public OrderItem modelItemsFromResultSet(ResultSet resultSet) throws SQLException {
 		Long itemId = resultSet.getLong("item_id");
 		String itemType = resultSet.getString("type");
@@ -36,6 +53,12 @@ public class OrderItemDAO {
 	}
 	
 	
+	
+	/*
+	 * Reads the latest item in the database and calls the method to unwrap the data set
+	 * 
+	 * @return the order item for the latest order item in the table, if exception caught return null
+	 */
 	public OrderItem readLatest() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
@@ -52,6 +75,13 @@ public class OrderItemDAO {
 
 
 	
+	/*
+	 * Inserts the given order item into orderitem table
+	 * 
+	 * @param orderitem - takes an order item to be added to the database
+	 * 
+	 * @return the orderitem that has been added to the table, if exception caught then return null
+	 */
 	public OrderItem create(OrderItem orderItem) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection.prepareStatement
@@ -69,6 +99,14 @@ public class OrderItemDAO {
 	}
 	
 	
+	
+	/*
+	 * Read all items in a order of the given id
+	 * 
+	 * @param order id - takes the id of an order
+	 * 
+	 * @return the list of order items, if exception caught return an empty list
+	 */
 	public List<OrderItem> readAll(Long orderId) {
 		try(Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection.prepareStatement("SELECT oi.item_id, i.type, i.name, i.cost, oi.quantity FROM orderitems oi "
@@ -94,6 +132,12 @@ public class OrderItemDAO {
 	}
 
 
+	
+	/*
+	 * Deletes all order items for a given order id
+	 * 
+	 * @param order id - takes the id of an order
+	 */
 	public int delete(Long orderId) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection.prepareStatement("DELETE FROM orderitems WHERE order_id = ?");) {
@@ -107,6 +151,12 @@ public class OrderItemDAO {
 	}
 	
 	
+	
+	/*
+	 * Deletes all order items with a given order id and item id
+	 * 
+	 * @param order id, item id - takes the id of an order and the id of an item
+	 */
 	public int delete(Long orderId, Long itemId) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection.prepareStatement
@@ -122,6 +172,12 @@ public class OrderItemDAO {
 	}
 	
 	
+	
+	/*
+	 * Deletes all order items with a given item id
+	 * 
+	 * @param item id - takes the id of an item
+	 */
 	public int correctTable(Long itemId) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection.prepareStatement

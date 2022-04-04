@@ -1,4 +1,4 @@
-package com.qa.ims.persistence.domain;
+package com.qa.ims.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -8,7 +8,7 @@ import com.qa.ims.utils.Utils;
 public enum AddOrRemove {
 
 	/*
-	 * Choose between orders, items in an order or to return
+	 * Choose between add items to an order, remove items from order or to return
 	 */
 	ADD("Add an item to an order"), REMOVE("Remove an item from an order"), RETURN("To return");
 	
