@@ -41,6 +41,7 @@ public class ItemDAO implements Dao<Item> {
 	 * 
 	 * @return an object for the latest item in table, if exception caught then return null
 	 */
+	@Override
 	public Item readLatest() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();

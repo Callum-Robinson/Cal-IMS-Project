@@ -8,6 +8,8 @@ public interface Dao<T> {
 
 	List<T> readAll();
 	
+	T readLatest();
+	
 	T read(Long id);
 
 	T create(T t);

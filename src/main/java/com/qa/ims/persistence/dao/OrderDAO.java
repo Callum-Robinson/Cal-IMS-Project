@@ -49,6 +49,7 @@ public class OrderDAO implements Dao<Order> {
 	 * 
 	 * @return an object for the latest order in the table, if exception is caught then return null
 	 */
+	@Override
 	public Order readLatest() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
