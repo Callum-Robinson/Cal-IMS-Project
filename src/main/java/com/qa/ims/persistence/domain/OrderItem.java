@@ -11,6 +11,12 @@ public class OrderItem {
 	private Double itemCost;
 	private Double totalCostOfItem;
 	
+	
+	
+	
+	/*
+	 * OrderItem constructors 
+	 */
 	public OrderItem(Long orderId, Long itemId, Integer quantity) {
 		super();
 		this.setOrderId(orderId);
@@ -37,6 +43,11 @@ public class OrderItem {
 	}
 
 	
+	
+	
+	/*
+	 * Getters and Setters
+	 */
 	public Long getOrderId() {
 		return orderId;
 	}
@@ -107,6 +118,11 @@ public class OrderItem {
 	}
 
 
+	
+	
+	/*
+	 * Generate override for toString and edited for easier reading of output
+	 */
 	@Override
 	public String toString() {
 		return "[Item Id: " + itemId + ", Item Type: " + itemType + ", Item Name: " + itemName + ", Item Cost: "

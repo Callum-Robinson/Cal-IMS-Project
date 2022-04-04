@@ -53,7 +53,7 @@ public class OrderController implements CrudController<Order> {
 	
 	/*
 	 * Creates an order instance with user entered fields
-	 * Gives option to add a whole order or just an order item
+	 * Adds an item to the order and asks the user if they want to add more
 	 * 
 	 * @return the order
 	 */
@@ -93,9 +93,13 @@ public class OrderController implements CrudController<Order> {
 	}
 
 
-
 	
-	
+	/*
+	 * Reads all orders to the console using the logger
+	 * It also iterates through the items in each order to be added to the output
+	 * 
+	 * @return the list of orders
+	 */
 	@Override
 	public List<Order> readAll() {
 		List<Order> orders = orderDAO.readAll();
@@ -112,6 +116,13 @@ public class OrderController implements CrudController<Order> {
 	}
 
 
+	
+	/*
+	 * Gives the user an option to either add an item to an order or remove an item from an order
+	 * 
+	 * @return - for add item return the new order
+	 *         - for delete return null
+	 */
 	@Override
 	public Order update() {
 		AddOrRemove choice = null;
@@ -173,6 +184,10 @@ public class OrderController implements CrudController<Order> {
 		return null;
 	}
 
+	
+	/*
+	 * Delete the order for order id given by the user
+	 */
 	@Override
 	public int delete() {
 		LOGGER.info("Please enter the id of the order you would like to delete");

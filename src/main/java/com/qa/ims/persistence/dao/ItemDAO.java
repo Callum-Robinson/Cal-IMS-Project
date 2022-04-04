@@ -158,7 +158,7 @@ public class ItemDAO implements Dao<Item> {
 
 	
 	/*
-	 * Deletes an item in the database
+	 * Deletes an item in the database (and deletes any orderitems with the deleted item)
 	 * 
 	 * @param id - the item id
 	 */

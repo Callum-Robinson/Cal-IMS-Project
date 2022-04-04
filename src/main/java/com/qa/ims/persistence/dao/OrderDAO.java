@@ -18,12 +18,14 @@ import com.qa.ims.utils.DBUtils;
 public class OrderDAO implements Dao<Order> {
 
 	public static final Logger LOGGER = LogManager.getLogger();
+	
+	
 	/*
 	 * Models the Order object from a database result set
 	 * 
 	 * @param resultset - takes in a result set, the data for each column is added to the appropriate field
 	 * 
-	 * @return an instance of Order using the constructor with all fields
+	 * @return an instance of Order using the appropriate constructor
 	 */
 	@Override
 	public Order modelFromResultSet(ResultSet resultSet) throws SQLException {
@@ -34,6 +36,13 @@ public class OrderDAO implements Dao<Order> {
 	}
 	
 	
+	/*
+	 * Models the Order object from a database result set with the customer name from the customer table
+	 * 
+	 * @param resultset - takes in a result set with the customer first names and surnames
+	 * 
+	 * @return an instance of Order using the appropriate constructor
+	 */
 	public Order modelWithCustomer(ResultSet resultSet) throws SQLException {
 		Long id = resultSet.getLong("id");
 		Long customerId = resultSet.getLong("customer_id");
@@ -68,6 +77,8 @@ public class OrderDAO implements Dao<Order> {
 	 * Creates an order in the database
 	 * 
 	 * @param order - takes in an order object
+	 * 
+	 * @return order added to the database
 	 */
 	@Override
 	public Order create(Order order) {
@@ -87,6 +98,14 @@ public class OrderDAO implements Dao<Order> {
 	}
 	
 	
+	
+	/*
+	 * Reads the order with the given order id
+	 * 
+	 * @param id - takes the order id
+	 * 
+	 * @return the order
+	 */
 	@Override
 	public Order read(Long id) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
@@ -104,6 +123,11 @@ public class OrderDAO implements Dao<Order> {
 	}
 	
 	
+	/*
+	 * Read all orders in the table with the customer names using a JOIN query
+	 * 
+	 * @return list of orders
+	 */
 	@Override
 	public List<Order> readAll() {
 		try(Connection connection = DBUtils.getInstance().getConnection();
@@ -125,6 +149,11 @@ public class OrderDAO implements Dao<Order> {
 
 
 
+	/*
+	 * Deletes the order of a given id (and the orderitems for that order)
+	 * 
+	 * @param id - takes the order id
+	 */
 	@Override
 	public int delete(long id) {
 		OrderItemDAO orderItemDAO = new OrderItemDAO();
@@ -141,6 +170,12 @@ public class OrderDAO implements Dao<Order> {
 	}
 
 
+	
+	/*
+	 * Deletes any orders with the customer id given (and deletes any orderitems within the order)
+	 * 
+	 * @param customer id - takes the id of a customer
+	 */
 	public int correctOrder(Long customerId) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection.prepareStatement("SELECT * FROM orders WHERE customer_id = ?");) {

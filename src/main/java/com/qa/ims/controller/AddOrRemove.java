@@ -8,7 +8,7 @@ import com.qa.ims.utils.Utils;
 public enum AddOrRemove {
 
 	/*
-	 * Choose between orders, items in an order or to return
+	 * Choose between add items to an order, remove items from order or to return
 	 */
 	ADD("Add an item to an order"), REMOVE("Remove an item from an order"), RETURN("To return");
 	
