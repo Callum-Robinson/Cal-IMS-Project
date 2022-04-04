@@ -42,7 +42,7 @@ public class Utils {
 				input = getString();
 				intInput = Integer.parseUnsignedInt(input);
 			} catch (NumberFormatException nfe) {
-				LOGGER.info("Error - Please enter an unisigned integer number");
+				LOGGER.info("Error - Please enter an unsigned integer number");
 			}
 		} while (intInput == null);
 		return intInput;
