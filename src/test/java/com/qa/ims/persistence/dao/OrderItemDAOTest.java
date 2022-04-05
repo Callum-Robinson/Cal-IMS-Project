@@ -8,9 +8,20 @@ public class OrderItemDAOTest {
 
 	private final OrderItemDAO DAO = new OrderItemDAO();
 	
+	/*
+	 * Setup the connection with the test database
+	 */
 	@Before
 	public void setup() {
 		DBUtils.connect();
 		DBUtils.getInstance().init("src/test/resources/sql-schema.sql", "src/test/resources/sql-data.sql");
 	}
+	
+	
+	/*
+	 * 
+	 */
+	
+	
+	
 }

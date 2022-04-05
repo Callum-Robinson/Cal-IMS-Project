@@ -67,8 +67,20 @@ public class OrderDAOTest {
 	
 	
 	/*
-	 * 
+	 * Test the delete method
 	 */
+	@Test
+	public void testDelete() {
+		assertEquals(1, DAO.delete(1));
+	}
 	
+	
+	/*
+	 * Test the correct order method
+	 */
+	@Test
+	public void testCorrectOrder() {
+		assertEquals(1, DAO.correctOrder(1L));
+	}
 	
 }
