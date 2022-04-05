@@ -1,5 +1,7 @@
 package com.qa.ims.persistence.dao;
 
+import static org.junit.Assert.assertEquals;
+
 import java.time.LocalDate;
 
 import org.junit.Before;
@@ -27,6 +29,7 @@ public class OrderDAOTest {
 	 */
 	@Test
 	public void testCreate() {
-		final Order created = new Order(2L, 1L, LocalDate.of(2, 4, 2022));
+		final Order created = new Order(2L, 1L, LocalDate.of(2022, 4, 2));
+		assertEquals(created, DAO.create(created));
 	}
 }
