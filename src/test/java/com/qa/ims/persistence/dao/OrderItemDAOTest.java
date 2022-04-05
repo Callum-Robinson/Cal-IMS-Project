@@ -1,7 +1,11 @@
 package com.qa.ims.persistence.dao;
 
-import org.junit.Before;
+import static org.junit.Assert.assertEquals;
 
+import org.junit.Before;
+import org.junit.Test;
+
+import com.qa.ims.persistence.domain.OrderItem;
 import com.qa.ims.utils.DBUtils;
 
 public class OrderItemDAOTest {
@@ -19,8 +23,13 @@ public class OrderItemDAOTest {
 	
 	
 	/*
-	 * 
+	 * Test the create method in the Order Item DAO
 	 */
+	@Test
+	public void testCreate() {
+		final OrderItem created = new OrderItem (2L, 1L, 3);
+		assertEquals(created, DAO.create(created));
+	}
 	
 	
 	

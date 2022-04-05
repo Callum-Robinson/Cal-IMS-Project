@@ -31,7 +31,7 @@ public class OrderDAOTest {
 	 */
 	@Test
 	public void testCreate() {
-		final Order created = new Order(2L, 1L, LocalDate.of(2022, 4, 2));
+		final Order created = new Order(3L, 1L, LocalDate.of(2022, 4, 2));
 		assertEquals(created, DAO.create(created));
 	}
 	
@@ -41,7 +41,7 @@ public class OrderDAOTest {
 	 */
 	@Test
 	public void testReadLatest() {
-		assertEquals(new Order (1L, 1L, LocalDate.of(2022, 4, 2)), DAO.readLatest());
+		assertEquals(new Order (2L, 1L, LocalDate.of(2022, 4, 3)), DAO.readLatest());
 	}
 	
 	
@@ -52,6 +52,7 @@ public class OrderDAOTest {
 	public void testReadALL() {
 		List<Order> expected = new ArrayList<>();
 		expected.add(new Order (1L, 1L, "jordan harrison", LocalDate.of(2022, 4, 2)));
+		expected.add(new Order (2L, 1L, "jordan harrison", LocalDate.of(2022, 4, 3)));
 		assertEquals(expected, DAO.readAll());
 	}
 	
@@ -80,7 +81,7 @@ public class OrderDAOTest {
 	 */
 	@Test
 	public void testCorrectOrder() {
-		assertEquals(1, DAO.correctOrder(1L));
+		assertEquals(2, DAO.correctOrder(1L));
 	}
 	
 }
