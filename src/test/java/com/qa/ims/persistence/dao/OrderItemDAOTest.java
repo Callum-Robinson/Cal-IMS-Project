@@ -2,6 +2,9 @@ package com.qa.ims.persistence.dao;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -44,7 +47,16 @@ public class OrderItemDAOTest {
 	
 	
 	/*
-	 * 
+	 * Test the read all method in the Order Item DAO
 	 */
+	@Test
+	public void testReadAll() {
+		final long ORDERID = 1L;
+		List<OrderItem> expected = new ArrayList<>();
+		expected.add(new OrderItem (1L, "Ice cream", "Strawberry ice cream", 2.99, 3, 8.97));
+		assertEquals(expected, DAO.readAll(ORDERID));
+	}
+
+	
 	
 }
