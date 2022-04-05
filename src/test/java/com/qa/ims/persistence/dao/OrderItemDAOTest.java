@@ -76,6 +76,11 @@ public class OrderItemDAOTest {
 	}
 	
 	
-	
-	
+	/*
+	 * Test the correct table method
+	 */
+	@Test
+	public void testCorrectTable() {
+		assertEquals(1, DAO.correctTable(1L));
+	}
 }
