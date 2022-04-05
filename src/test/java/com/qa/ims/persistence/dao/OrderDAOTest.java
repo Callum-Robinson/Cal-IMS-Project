@@ -56,5 +56,19 @@ public class OrderDAOTest {
 	}
 	
 	
+	/*
+	 * Test the read by id method
+	 */
+	@Test
+	public void testRead() {
+		final long ID = 1L;
+		assertEquals(new Order (ID, 1L, LocalDate.of(2022, 4, 2)), DAO.read(ID));
+	}
+	
+	
+	/*
+	 * 
+	 */
+	
 	
 }
