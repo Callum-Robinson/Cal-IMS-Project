@@ -33,4 +33,13 @@ public class OrderItemDAOTest {
 	
 	
 	
+	/*
+	 * Test the read latest method in the Order Item DAO
+	 */
+	@Test
+	public void testReadLatest() {
+		assertEquals(new OrderItem (1L, 1L, 3), DAO.readLatest());
+	}
+	
+	
 }
