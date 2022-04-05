@@ -1,7 +1,7 @@
-DROP TABLE IF EXISTS `customers`;
-DROP TABLE IF EXISTS `items`;
-DROP TABLE IF EXISTS `orders`;
 DROP TABLE IF EXISTS `orderitems`;
+DROP TABLE IF EXISTS `orders`;
+DROP TABLE IF EXISTS `items`;
+DROP TABLE IF EXISTS `customers`;
 
 
 CREATE TABLE IF NOT EXISTS `customers` (
@@ -24,7 +24,8 @@ CREATE TABLE IF NOT EXISTS `orders` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
     `customer_id` BIGINT NOT NULL,
     `date_placed` DATE DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`customer_id`) REFERENCES `customers`(`id`)
 );
 
 
@@ -32,5 +33,7 @@ CREATE TABLE IF NOT EXISTS `orderitems` (
     `order_id` BIGINT NOT NULL,
     `item_id` BIGINT NOT NULL,
     `quantity` INT DEFAULT 1,
-    PRIMARY KEY (`order_id`, `item_id`)
+    PRIMARY KEY (`order_id`, `item_id`),
+    FOREIGN KEY (`order_id`) REFERENCES `orders`(`id`),
+    FOREIGN KEY (`item_id`) REFERENCES `items`(`id`)
 );

@@ -16,7 +16,7 @@ public class ItemDAOTest {
 	private final ItemDAO DAO = new ItemDAO();
 	
 	/*
-	 * Setup up the connection with the test database
+	 * Setup the connection with the test database
 	 */
 	@Before
 	public void setup() {
