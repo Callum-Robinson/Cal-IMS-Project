@@ -27,7 +27,7 @@ public class OrderItemDAOTest {
 	 */
 	@Test
 	public void testCreate() {
-		final OrderItem created = new OrderItem (2L, 1L, 3);
+		final OrderItem created = new OrderItem (2L, 1L, 5);
 		assertEquals(created, DAO.create(created));
 	}
 	
@@ -41,5 +41,10 @@ public class OrderItemDAOTest {
 		assertEquals(new OrderItem (1L, 1L, 3), DAO.readLatest());
 	}
 	
+	
+	
+	/*
+	 * 
+	 */
 	
 }
