@@ -126,7 +126,7 @@ public class Order {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(customerId, datePlaced, id, orderItems);
+		return Objects.hash(customerId, customerName, datePlaced, id, orderItems);
 	}
 
 
@@ -140,8 +140,11 @@ public class Order {
 		if (getClass() != obj.getClass())
 			return false;
 		Order other = (Order) obj;
-		return Objects.equals(customerId, other.customerId) && Objects.equals(datePlaced, other.datePlaced)
-				&& Objects.equals(id, other.id) && Objects.equals(orderItems, other.orderItems);
+		return Objects.equals(customerId, other.customerId) && Objects.equals(customerName, other.customerName)
+				&& Objects.equals(datePlaced, other.datePlaced) && Objects.equals(id, other.id)
+				&& Objects.equals(orderItems, other.orderItems);
 	}
+
+
 	
 }
