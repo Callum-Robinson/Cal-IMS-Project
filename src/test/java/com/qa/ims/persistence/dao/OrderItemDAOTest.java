@@ -58,5 +58,24 @@ public class OrderItemDAOTest {
 	}
 
 	
+	/*
+	 * Test the first delete method
+	 */
+	@Test
+	public void testDelete() {
+		assertEquals(1, DAO.delete(1L));
+	}
+	
+	
+	/*
+	 * Test the second delete method (with order id and item id)
+	 */
+	@Test
+	public void testOverloadedDelete() {
+		assertEquals(1, DAO.delete(1L, 1L));
+	}
+	
+	
+	
 	
 }
