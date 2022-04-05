@@ -63,7 +63,7 @@ public class OrderItemDAO {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery
-						("SELECT * FROM orderitems ORDER BY item_id, order_id DESC LIMIT 1");) {
+						("SELECT * FROM orderitems ORDER BY order_id DESC, item_id DESC LIMIT 1");) {
 			resultSet.next();
 			return modelFromResultSet(resultSet);
 		} catch (Exception e) {
