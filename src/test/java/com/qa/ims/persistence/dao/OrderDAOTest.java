@@ -3,6 +3,8 @@ package com.qa.ims.persistence.dao;
 import static org.junit.Assert.assertEquals;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -32,4 +34,27 @@ public class OrderDAOTest {
 		final Order created = new Order(2L, 1L, LocalDate.of(2022, 4, 2));
 		assertEquals(created, DAO.create(created));
 	}
+	
+	
+	/*
+	 * Test the read latest method in the Order DAO
+	 */
+	@Test
+	public void testReadLatest() {
+		assertEquals(new Order (1L, 1L, LocalDate.of(2022, 4, 2)), DAO.readLatest());
+	}
+	
+	
+	/*
+	 * Test the read all method in the Order DAO
+	 */
+	@Test
+	public void testReadALL() {
+		List<Order> expected = new ArrayList<>();
+		expected.add(new Order (1L, 1L, "jordan harrison", LocalDate.of(2022, 4, 2)));
+		assertEquals(expected, DAO.readAll());
+	}
+	
+	
+	
 }
