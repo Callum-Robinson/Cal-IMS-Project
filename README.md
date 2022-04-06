@@ -1,92 +1,71 @@
-### Jira Board
-https://callumjrobinson.atlassian.net/jira/software/projects/IP/boards/2
+### Jira Roadmap of the Completed Sprint
+https://callumjrobinson.atlassian.net/jira/software/projects/IP/boards/2/roadmap
 
 
-# Project Title
+# IMS Project
 
-One Paragraph of project description goes here
+In this project a functional inventory management system was created with CRUD functionality for customers, items and orders. This used all technologies and modules covered to this point in the software specialist course. The documentation folder contains the ERD diagram of the database tables, the UML class diagram of the application, the risk assessment matrix for the project and the pdf presentation for this project.
 
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+## Getting the Application Running and Tested
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+What you will need beforehand
 
 ```
-Give examples
+- MySQL instance and the connection information and login like shown:
+```
+![image](https://user-images.githubusercontent.com/100779521/161999773-fc4cde20-217d-490a-8378-f3d50c98f9db.png)
+
+```
+- Java Runtime Environment will be needed to run the .jar file
+```
+
+```
+- A bash terminal
 ```
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
+To run the application you need to:
 
 ```
-Give the example
+- Clone a copy of this project 
 ```
 
-And repeat
-
 ```
-until finished
+- Update the src/main/resources/db.properties with the local MySQL instance you created
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+```
+- From where the fat.jar is saved use the following in a bash terminal: java -jar ims-0.0.1-jar-with-dependencies.jar
+```
 
 ## Running the tests
 
-Explain how to run the automated tests for this system. Break down into which tests and what they do
-
-### Unit Tests 
-
-Explain what these tests test, why and how to run them
-
 ```
-Give an example
+- Simply use Maven with 'mvn test' to run all unit tests in the application
 ```
 
-### Integration Tests 
-Explain what these tests test, why and how to run them
-
 ```
-Give an example
+- Coverage: 62.4%
 ```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
 
 ## Built With
 
 * [Maven](https://maven.apache.org/) - Dependency Management
 
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning.
 
 ## Authors
 
-* **Chris Perrins** - *Initial work* - [christophperrins](https://github.com/christophperrins)
+* **Callum Robinson** - [Callum-Robinson](https://github.com/Callum-Robinson)
 
 ## License
 
-This project is licensed under the MIT license - see the [LICENSE.md](LICENSE.md) file for details 
-
-*For help in [Choosing a license](https://choosealicense.com/)*
+This project is licensed under the MIT license - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* The template for this project: [IMS-Starter](https://github.com/JHarry444/IMS-Starter)
+* Morgan Walsh for the support during the project
+* Jamie-lee MacAskill for her constant support
